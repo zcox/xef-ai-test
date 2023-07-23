@@ -12,7 +12,15 @@ Testing out [xef.ai](https://xef.ai).
 ## Questions
 
 - in wine example, why is wine category not parsed?
+```
+merlot is merlot
+```
 - in story example, why are animal and invention parsed, but story is not?
+```
+Animal(Axolotl,Freshwater,Carnivorous)
+Invention(Internet,Tim Berners-Lee,1989,Global communication and information sharing)
+Story about Axolotl and Internet:
+```
 - why does it make multiple reqs to openai for single prompt?
 - and why does it log all of those ^^ to (assuming) stdout?
 - how to log/capture the full prompt + output?
