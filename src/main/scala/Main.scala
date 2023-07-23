@@ -1,7 +1,7 @@
 import com.xebia.functional.xef.scala.auto.*
 import io.circe.Decoder
 
-private final case class Wine(category: String) derives SerialDescriptor, Decoder
+private final case class Wine(name: String, category: String) derives SerialDescriptor, Decoder
 
 def classifyWine(name: String): AI[Wine] = 
   prompt(s"""
@@ -18,11 +18,13 @@ def classifyWine(name: String): AI[Wine] =
     |text: $name
     |category:
   """.stripMargin)
+  // prompt[Wine](s"The category of wine is either red wine or white wine. What is the category of '$name'?")
+  // prompt[Wine]("What is your favorite wine?")
 
 @main def runBook: Unit = ai {
   val name = "merlot"
   val wine = classifyWine(name)
-  println(s"$name is ${wine.category}")
+  println(s"${wine.name} is ${wine.category}")
 }.getOrElse(ex => println(ex.getMessage))
 
 
