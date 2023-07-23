@@ -1,6 +1,5 @@
 Global / onChangedBuildSource := ReloadOnSourceChanges
 
-
 scalaVersion := "3.3.0"
 
 lazy val V = new {

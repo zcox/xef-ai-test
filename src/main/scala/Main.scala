@@ -28,6 +28,9 @@ def classifyWine(name: String): AI[Wine] =
 
 
 
+
+// https://github.com/xebia-functional/xef/blob/main/examples/scala/src/main/scala/com/xebia/functional/xef/scala/auto/Animal.scala
+
 // private final case class Animal(name: String, habitat: String, diet: String) derives SerialDescriptor, Decoder
 
 // private final case class Invention(name: String, inventor: String, year: Int, purpose: String) derives SerialDescriptor, Decoder
