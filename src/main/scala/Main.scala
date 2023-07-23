@@ -5,19 +5,19 @@ private final case class Wine(category: String) derives SerialDescriptor, Decode
 
 def classifyWine(name: String): AI[Wine] = 
   prompt(s"""
-    Multi-choice problem: What is the category of the object?
-    - red wine
-    - white wine
-
-    text: chardonnay
-    category: white wine
-
-    text: carbernet sauvignon
-    category: red wine
-
-    text: $name
-    category:
-  """)
+    |Multi-choice problem: What is the category of the object?
+    |- red wine
+    |- white wine
+    |
+    |text: chardonnay
+    |category: white wine
+    |
+    |text: carbernet sauvignon
+    |category: red wine
+    |
+    |text: $name
+    |category:
+  """.stripMargin)
 
 @main def runBook: Unit = ai {
   val name = "merlot"
