@@ -11,10 +11,6 @@ Testing out [xef.ai](https://xef.ai).
 
 ## Questions
 
-- in wine example, why is wine category not parsed?
-```
-merlot is merlot
-```
 - in story example, why are animal and invention parsed, but story is not?
 ```
 Animal(Axolotl,Freshwater,Carnivorous)
