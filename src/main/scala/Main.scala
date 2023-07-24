@@ -3,29 +3,43 @@ import io.circe.Decoder
 
 private final case class Wine(name: String, category: String) derives SerialDescriptor, Decoder
 
-def classifyWine(name: String): AI[Wine] = 
-  prompt(s"""
-    |Multi-choice problem: What is the category of the object?
-    |- red wine
-    |- white wine
-    |
-    |text: chardonnay
-    |category: white wine
-    |
-    |text: carbernet sauvignon
-    |category: red wine
-    |
-    |text: $name
-    |category:
-  """.stripMargin)
+// def classifyWine(name: String): AI[Wine] = 
+//   prompt(s"""
+//     |Multi-choice problem: What is the category of the object?
+//     |- red wine
+//     |- white wine
+//     |
+//     |text: chardonnay
+//     |category: white wine
+//     |
+//     |text: carbernet sauvignon
+//     |category: red wine
+//     |
+//     |text: $name
+//     |category:
+//   """.stripMargin)
   // prompt[Wine](s"The category of wine is either red wine or white wine. What is the category of '$name'?")
   // prompt[Wine]("What is your favorite wine?")
 
-@main def runBook: Unit = ai {
-  val name = "merlot"
-  val wine = classifyWine(name)
+def classifyWine(name: String): AI[Wine] =
+  contextScope(
+    List(
+      "You are a categorizer of wine. When given the text, you will respond with the category of the wine. The two categories are red wine and white wine. Some examples of responses are:",
+      """|text: chardonnay
+         |category: white wine""".stripMargin,
+      """|text: cabernet sauvignon
+         |category: white wine""".stripMargin
+    )
+  ) {
+    prompt(s"""
+    |text: $name""".stripMargin)
+  }
+
+@main def runBook: Unit = {
+  val name = "pinot grigio"
+  val wine = ai[Wine](classifyWine(name)).getOrElse(ex => throw ex)
   println(s"${wine.name} is ${wine.category}")
-}.getOrElse(ex => println(ex.getMessage))
+}
 
 
 
